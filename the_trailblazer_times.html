@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TRAILBLAZER TIMES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            padding: 0.5rem;
+            margin: 0;
+        }
+        .newspaper-container {
+            width: 210mm; /* A4 width */
+            max-width: 210mm;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 1rem;
+            border: 2px solid #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .newspaper-container > *:last-child {
+            margin-bottom: 0;
+        }
+        .bottom-footer {
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #eee;
+        }
+        .header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .logo-box {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            max-height: 40px;
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        .newspaper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .tagline {
+            font-size: 0.7rem;
+            font-style: italic;
+            text-align: right;
+        }
+        .headline-section {
+            border-bottom: 1px solid #000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        .subheadline {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #555;
+            margin-top: 0.25rem;
+            line-height: 1.3;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+        .article-body {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        .column-divider {
+            height: 100%;
+            width: 1px;
+            background-color: #ddd;
+        }
+        .quick-bullets-box, .fact-box {
+            border: 1px solid #000;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+        }
+        .quick-bullets-box h3, .fact-box h3, .side-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #000;
+            padding-bottom: 0.25rem;
+        }
+        .bullet-list {
+            list-style-type: disc;
+            margin-left: 1rem;
+            margin-top: 0.25rem;
+        }
+        .bullet-list li {
+            margin-bottom: 0.25rem;
+            font-size: 0.75rem;
+        }
+        .side-box {
+            background-color: #e3f2fd; /* A subtle blue */
+            color: #1a237e; /* A dark blue for contrast */
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .side-box-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .side-image {
+            display: block;
+            margin: 0 auto 0.5rem auto;
+            width: 60px; 
+            height: auto;
+        }
+        .side-box p {
+            font-size: 0.7rem;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .images {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        .image-container {
+            flex: 1 1 calc(50% - 0.25rem);
+            position: relative;
+            min-height: 200px;
+            overflow: hidden;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain; /* Changed from cover to contain to show full image */
+            border-radius: 0.25rem;
+        }
+        .caption {
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        .aws-logo {
+            max-height: 20px;
+            width: auto;
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .fact-box-content {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .fact-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 0.25rem;
+        }
+        .fact-list li {
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+            font-size: 0.7rem;
+        }
+
+        /* A4 Print Styles */
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            .newspaper-container {
+                width: 210mm;
+                margin: 0;
+                padding: 0.5rem;
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+        }
+        
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.25rem;
+            }
+            .newspaper-container {
+                padding: 0.5rem;
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+            }
+            .newspaper-title {
+                font-size: 1.5rem;
+            }
+            .headline {
+                font-size: 1.2rem;
+            }
+            .subheadline {
+                font-size: 0.8rem;
+            }
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .header {
+                margin-bottom: 0.5rem;
+            }
+            .headline-section {
+                margin-bottom: 0.5rem;
+            }
+            .images {
+                flex-direction: column;
+                gap: 0.25rem;
+                margin: 0.25rem 0;
+            }
+            .image-container {
+                min-height: 150px;
+            }
+            .side-box {
+                margin-bottom: 0.25rem;
+                padding: 0.5rem;
+            }
+            .quick-bullets-box, .fact-box {
+                margin-top: 0.25rem;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="newspaper-container">
+
+    <!-- Header & Masthead -->
+    <header class="header">
+        <div class="flex-grow">
+            <div class="logo-box">
+                <img src="image_7df886.png" alt="1CloudHub Logo" class="logo">
+                <h1 class="newspaper-title">THE TRAILBLAZER TIMES</h1>
+            </div>
+            <p class="tagline">From Cost Burden to Cloud Brilliance</p>
+        </div>
+        <div class="text-right">
+            <p class="text-xs text-gray-500 -mt-2" style="font-size: 0.65rem;">Sep 26, 2025</p>
+            <p class="text-xs text-gray-500" style="font-size: 0.65rem;">Volume: 01</p>
+        </div>
+    </header>
+
+    <!-- Headline Section -->
+    <section class="headline-section">
+        <h2 class="headline">
+            From Cost Burden to Cloud Brilliance: Shearwater's 
+            <img src="image_7dfb53.png" alt="Shearwater Health Logo" class="h-12 w-auto inline-block mx-3 align-middle" style="filter: brightness(1.2) contrast(1.1);">
+            Analytics Reinvention
+        </h2>
+        <h3 class="subheadline">
+            1CloudHub empowers Shearwater Health with cloud-native analytics powered by AWS and Generative AI.
+        </h3>
+    </section>
+
+    <!-- Main Content & Side Box -->
+    <div class="main-content">
+        <!-- Left Column: Article Body & Bulletins -->
+        <div>
+            <div class="article-body">
+                <p>Shearwater Health, a global leader in Clinical Process Outsourcing® (CPO®), faced challenges in scaling its intelligence operations. High BI license costs, delayed insights, and limited adoption hindered decision-making. 1CloudHub stepped in, migrating from legacy BI to AWS QuickSight and automating ETL processes with AWS Glue (PySpark, PyAthena). They further integrated Generative AI for enhanced, smart data storytelling.</p>
+                <p class="mt-2">This transformation resulted in 70% faster reporting, 70% cost savings, and empowered 1,000 clinicians to make faster and more accurate healthcare decisions.</p>
+                
+                <h4 class="font-bold text-sm mt-3 mb-2">Real-Time Analytics in Action</h4>
+                <p class="mb-2">The implementation of AWS QuickSight has revolutionized how Shearwater Health processes and visualizes their clinical data. The dashboards below demonstrate the power of cloud-native analytics, showcasing real-time insights into patient outcomes, operational efficiency, and resource utilization across multiple healthcare facilities.</p>
+                
+                <p class="mb-2">These interactive dashboards enable healthcare professionals to identify trends, monitor key performance indicators, and make data-driven decisions that directly impact patient care quality. The integration of Generative AI further enhances the user experience by providing contextual insights and automated data storytelling.</p>
+                
+                <div class="images">
+                    <div class="image-container">
+                        <img src="quicksight_image.png" alt="AWS QuickSight Dashboard">
+                    </div>
+                    <div class="image-container">
+                        <img src="quicksight_images.png" alt="AWS QuickSight Dashboard">
+                    </div>
+                </div>
+                <p class="caption">Screenshots of AWS QuickSight dashboards, showcasing real-time analytics.</p>
+            </div>
+
+            <!-- Quick Bulletins -->
+            <div class="quick-bullets-box">
+                <h3 class="font-bold">QUICK BULLETINS</h3>
+                <ul class="bullet-list">
+                    <li>AWS Glue automation reduced manual effort by 60%</li>
+                    <li>Pay-per-session pricing enabled wider adoption</li>
+                    <li>Cloud-native scalability future-proofed analytics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Column: Side Box & Fact Box -->
+        <div class="flex flex-col">
+            <!-- Blue Side Box -->
+            <div class="side-box">
+                <h4 class="side-box-title">Generative AI + AWS QuickSight: Driving Smarter Decisions</h4>
+                
+                <img src="image_7dff8d.png" alt="Professional Generative AI Illustration" class="side-image">
+
+                <p>By embedding Generative AI into AWS QuickSight, analysts enabled dashboards that deliver interactive data stories, making insights faster and easier for leaders to consume.</p>
+            </div>
+
+            <!-- Fact Box & Logos -->
+            <div class="fact-box">
+                <h3 class="font-bold">FACT BOX & SERVICES USED</h3>
+                <ul class="fact-list">
+                    <li><strong>Platform:</strong> AWS QuickSight</li>
+                    <li><strong>ETL:</strong> AWS Glue (PySpark ETL)</li>
+                    <li><strong>Service:</strong> Cloud Migration & Modernization</li>
+                    <li><strong>Technology:</strong> Generative AI for Data Storytelling</li>
+                </ul>
+                <img src="image_7dfb8f.png" alt="AWS Logo" class="aws-logo">
+            </div>
+            
+            <!-- 1CloudHub Company Info -->
+            <div class="fact-box">
+                <h3 class="font-bold" style="font-family: 'Inter', sans-serif; font-size: 0.9rem;">ABOUT 1CLOUDHUB</h3>
+                <p class="text-xs mb-2"><strong>Motto:</strong> "Innovate. Transform. Thrive."</p>
+                <p class="text-xs mb-2"><strong>Mission:</strong> Digital Transformation with 1CloudHub - Advisory | Solutions | Implementation</p>
+                <ul class="fact-list">
+                    <li><strong>Core Services:</strong> Advisory, Migration, Modernization</li>
+                    <li><strong>AI-ML Driven SaaS:</strong> Unlock business insights</li>
+                    <li><strong>App Development:</strong> Build, test, deploy scalable applications</li>
+                    <li><strong>Security Consulting:</strong> Comprehensive cloud security</li>
+                    <li><strong>MSP Operations:</strong> 24/7 managed services</li>
+                    <li><strong>Generative AI:</strong> Revolutionize systems with GenAI</li>
+                </ul>
+                <p class="text-xs mt-2"><strong>Approach:</strong> Enterprise quality at startup agility. Do It Right the First Time (DIRFT).</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Bottom Footer - Professional Design -->
+    <div class="mt-4 pt-3 border-t-2 border-gray-300">
+        <div class="flex justify-between items-center">
+            <div class="text-xs text-gray-600">
+                <span class="font-medium">For further details visit:</span> 
+                <a href="https://www.1cloudhub.com/" target="_blank" class="text-blue-700 hover:text-blue-900 underline font-semibold ml-1">www.1cloudhub.com</a>
+            </div>
+            <div class="text-xs text-gray-500 italic">
+                <span class="font-medium">Published By</span> - Kavya S 1Cloudhub
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
